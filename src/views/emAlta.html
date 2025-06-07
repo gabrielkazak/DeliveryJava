@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Delivery - Em Alta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../src/views/emAlta.css">
+  </head>
+  <body>
+    <div class="container-fluid d-flex flex-column mx-0 px-0 mb-5">
+      <div class="header col-12 d-flex justify-content-between align-items-center">
+        <div class="left-header d-flex flex-column">
+          <p class="username" th:text="'Olá ' + ${user.name}"></p>
+          <p class="wallet" th:text="'Saldo: R$' + ${user.saldo}"></p>
+        </div>
+        <p class="city">Taquara - RS</p>
+      </div>
+
+      <div th:if="${comidas != null and !comidas.empty}" class="row g-0 d-flex justify-content-evenly pt-5">
+        <div th:each="comida : ${comidas}" class="col-8 col-lg-3 mb-4 ms-1 me-1">
+          <div class="foodCard d-flex flex-column align-items-center">
+            <img th:src="${comida.image}" class="imagemTeste">
+            
+            <p class="estabTitle pt-3 pb-0 fs-2 text-white" 
+               th:if="${restauranteMap.containsKey(comida.restaurantId)}"
+               th:text="${restauranteMap.get(comida.restaurantId).name}"></p>
+            <p class="estabTitle pt-3 pb-0 fs-2 text-white" 
+               th:unless="${restauranteMap.containsKey(comida.restaurantId)}">
+               Restaurante Desconhecido</p>
+
+            <div class="cardDivision d-flex justify-content-evenly w-100">
+              <div class="cardLeft d-flex flex-column">
+                <p class="cardTitle my-0 text-secondary fs-4">Info:</p>
+                <p th:text="'R$' + ${comida.price}" class="foodCost my-0 fs-3 text-white"></p>
+                <p th:text="${comida.name}" class="lunchName my-0 fs-5 text-white"></p>
+              </div>
+              <div class="divider"></div>
+              <div class="cardRight d-flex flex-column">
+                <p class="cardTitle my-0 text-secondary fs-4">Frete:</p>
+                <p th:text="'R$' + ${comida.delivery}" class="timeCost my-0 fs-3 text-white"></p>
+                <p th:text="${comida.time}" class="foodTime my-0 fs-5 text-white"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div th:unless="${comidas != null and !comidas.empty}">
+            <p>Nenhuma comida encontrada para exibir.</p>
+        </div>
+      </div>
+      
+      <div class="home-bar d-md-none">
+        <div class="bar col-12 d-flex justify-content-center align-items-center">
+            <a href="index_output.html" class="text-dark fs-3 mt-2">
+                <i class="bi bi-house-fill text-white"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>
