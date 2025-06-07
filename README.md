@@ -54,3 +54,7 @@ Esses arquivos representam as páginas completas, já com os dados da API embuti
 
     Gabriel – Estudante de Informática
     Projeto desenvolvido como prática de utilização de Java para web.
+
+## Link de Acesso
+
+    https://gabrielkazak.github.io/DeliveryJava/
